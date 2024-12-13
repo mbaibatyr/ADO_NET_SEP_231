@@ -5,13 +5,14 @@ namespace MySQLClient
 {
     public class Program
     {
-        static string conStr = "Server=206-P;Database=testDB;Trusted_Connection=True;TrustServerCertificate=true";
-        static string conStr2 = "Server=206-P;Database=testDB;User Id=user1;Password=1234;TrustServerCertificate=True;";
+        static string conStr = "Server=206-P;Database=DB;Trusted_Connection=True;TrustServerCertificate=true";
+        static string conStr2 = "Server=206-P;Database=DB;User Id=user1;Password=1234;TrustServerCertificate=True;";
 
         static void Main()
         {
             //TestConnection();
-            Console.WriteLine(GetDate());
+            //Console.WriteLine(GetDate());
+            SelectFromTable();
         }
 
         static string GetDate()
@@ -41,6 +42,24 @@ namespace MySQLClient
                 Console.WriteLine(db.State.ToString());
                 db.Close();
                 Console.WriteLine(db.State.ToString());
+            }
+        }
+
+        static void SelectFromTable()
+        {
+            using (SqlConnection db = new SqlConnection(conStr))
+            {
+                db.Open();
+                using (SqlCommand cmd = new SqlCommand("SELECT * FROM City", db))
+                {
+                    var dr = cmd.ExecuteReader();
+                    if (dr.HasRows)
+                        while (dr.Read())
+                        {
+                            Console.WriteLine($"{dr["id"].ToString()} - {dr["name"].ToString()}  - {dr["date_birth"].ToString()}");
+                        }
+                }
+                db.Close();
             }
         }
     }
