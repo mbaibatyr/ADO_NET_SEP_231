@@ -13,7 +13,8 @@ namespace MySQLClient
         {
             //TestConnection();
             //Console.WriteLine(GetDate());
-            SelectFromTable2();
+            //SelectFromTable2();
+            SelectFromProc();
         }
 
         static string GetDate()
@@ -73,12 +74,43 @@ namespace MySQLClient
                 {
                     DataTable dt = new DataTable();
                     dt.Load(cmd.ExecuteReader());
-                    Console.WriteLine($"ROWS: {dt.Rows.Count} COLUMNS: {dt.Columns.Count}");
+                    //Console.WriteLine($"ROWS: {dt.Rows.Count} COLUMNS: {dt.Columns.Count}");
+
+                    var row2 = dt.Select("id = 2").FirstOrDefault();
+                    if(row2 != null)
+                        Console.WriteLine($"{row2["id"].ToString()} - {row2["name"].ToString()}  - {row2["date_birth"].ToString()}");
+
                     foreach (DataRow row in dt.Rows)
                     {
                         Console.WriteLine($"{row["id"].ToString()} - {row["name"].ToString()}  - {row["date_birth"].ToString()}");
                     }
-                        
+
+                }
+                db.Close();
+            }
+        }
+
+        static void SelectFromProc()
+        {
+            using (SqlConnection db = new SqlConnection(conStr))
+            {
+                db.Open();
+                using (SqlCommand cmd = new SqlCommand("pCity;2", db))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    DataTable dt = new DataTable();
+                    dt.Load(cmd.ExecuteReader());
+                    //Console.WriteLine($"ROWS: {dt.Rows.Count} COLUMNS: {dt.Columns.Count}");
+
+                    var row2 = dt.Select("id = 2").FirstOrDefault();
+                    if (row2 != null)
+                        Console.WriteLine($"{row2["id"].ToString()} - {row2["name"].ToString()}  - {row2["date_birth"].ToString()}");
+
+                    //foreach (DataRow row in dt.Rows)
+                    //{
+                    //    Console.WriteLine($"{row["id"].ToString()} - {row["name"].ToString()}  - {row["date_birth"].ToString()}");
+                    //}
+
                 }
                 db.Close();
             }
