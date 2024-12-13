@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using System;
+using System.Data;
 
 namespace MySQLClient
 {
@@ -12,7 +13,7 @@ namespace MySQLClient
         {
             //TestConnection();
             //Console.WriteLine(GetDate());
-            SelectFromTable();
+            SelectFromTable2();
         }
 
         static string GetDate()
@@ -58,6 +59,26 @@ namespace MySQLClient
                         {
                             Console.WriteLine($"{dr["id"].ToString()} - {dr["name"].ToString()}  - {dr["date_birth"].ToString()}");
                         }
+                }
+                db.Close();
+            }
+        }
+
+        static void SelectFromTable2()
+        {
+            using (SqlConnection db = new SqlConnection(conStr))
+            {
+                db.Open();
+                using (SqlCommand cmd = new SqlCommand("SELECT * FROM City", db))
+                {
+                    DataTable dt = new DataTable();
+                    dt.Load(cmd.ExecuteReader());
+                    Console.WriteLine($"ROWS: {dt.Rows.Count} COLUMNS: {dt.Columns.Count}");
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        Console.WriteLine($"{row["id"].ToString()} - {row["name"].ToString()}  - {row["date_birth"].ToString()}");
+                    }
+                        
                 }
                 db.Close();
             }
