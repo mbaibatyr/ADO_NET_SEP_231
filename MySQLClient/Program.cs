@@ -16,7 +16,9 @@ namespace MySQLClient
             //SelectFromTable2();
             //SelectFromProc();
             //SelectFromView();
-            SelectFromTableFunction();
+            //SelectFromTableFunction();
+            InsertProc();
+            SelectFromProc();
         }
 
         static string GetDate()
@@ -157,6 +159,22 @@ namespace MySQLClient
                         Console.WriteLine($"{row["id"].ToString()} - {row["name"].ToString()}  - {row["date_birth"].ToString()}");
                     }
 
+                }
+                db.Close();
+            }
+        }
+
+        static void InsertProc()
+        {
+            using (SqlConnection db = new SqlConnection(conStr))
+            {
+                db.Open();
+                using (SqlCommand cmd = new SqlCommand("pCity", db))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@name", "Шымкент");
+                    cmd.Parameters.AddWithValue("@date_birth", DateTime.Now.AddYears(-100));
+                    cmd.ExecuteNonQuery();
                 }
                 db.Close();
             }
