@@ -10,10 +10,10 @@ namespace MySQLClient
 {
     public class Ado
     {
-        static string conStr = "Server=204-P;Database=MyDB;Trusted_Connection=True;TrustServerCertificate=true";
+        //static string conStr = "Server=204-P;Database=MyDB;Trusted_Connection=True;TrustServerCertificate=true";
         public static void Select()
         {
-            using (SqlConnection db = new SqlConnection(conStr))
+            using (SqlConnection db = new SqlConnection(Program.config["db"]))
             {
                 db.Open();
                 DataTable dt = new DataTable();
@@ -32,7 +32,7 @@ namespace MySQLClient
 
         public static void SelectByName(string name)
         {
-            using (SqlConnection db = new SqlConnection(conStr))
+            using (SqlConnection db = new SqlConnection(Program.config["db"]))
             {
                 db.Open();
                 DataTable dt = new DataTable();

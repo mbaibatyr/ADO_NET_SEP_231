@@ -7,7 +7,7 @@ namespace MySQLClient
 {
     public class Program
     {
-        static IConfigurationRoot config;
+        public static IConfigurationRoot config;
         static string conStr = "Server=206-P;Database=DB;Trusted_Connection=True;TrustServerCertificate=true";
         static string conStr2 = "Server=206-P;Database=DB;User Id=user1;Password=1234;TrustServerCertificate=True;";
 
