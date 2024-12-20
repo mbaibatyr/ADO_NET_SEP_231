@@ -55,5 +55,27 @@ namespace MySQLClient
                 db.Close();
             }
         }
+
+        public static void Insert(string name, int population, DateTime birthdate)
+        {
+            using (SqlConnection db = new SqlConnection(Program.config["db"]))
+            {
+                db.Open();
+                //using (SqlCommand cmd = new SqlCommand("pCity;3", db))
+                //{
+                //    cmd.CommandType = CommandType.StoredProcedure;
+                //    cmd.Parameters.AddWithValue("@name", name);
+                //    cmd.Parameters.AddWithValue("@population", population);
+                //    cmd.Parameters.AddWithValue("@birthdate", birthdate);
+                //    cmd.ExecuteNonQuery();
+                //}
+                using (SqlCommand cmd = new SqlCommand("INSERT INTO City (name, population, birthdate) " +
+                    "values('" + name + "', " + population + ", '" + birthdate.ToString("yyyy-MM-dd") + "')", db))
+                {                    
+                    cmd.ExecuteNonQuery();
+                }
+                db.Close();
+            }
+        }
     }
 }

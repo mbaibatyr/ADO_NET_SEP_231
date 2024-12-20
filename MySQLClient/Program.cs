@@ -15,7 +15,8 @@ namespace MySQLClient
         {
             config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
             //Ado.Select();
-            Ado.SelectByName("о");
+            //Ado.SelectByName("о");
+            Ado.Insert("Актобе", 800000, new DateTime(1900, 01, 01));
 
             #region примеры вызовов
             //TestConnection();
