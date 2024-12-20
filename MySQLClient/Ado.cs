@@ -77,5 +77,23 @@ namespace MySQLClient
                 db.Close();
             }
         }
+
+        public static void OutParameter()
+        {
+            using (SqlConnection db = new SqlConnection(Program.config["db"]))
+            {
+                db.Open();
+                using (SqlCommand cmd = new SqlCommand("pCity;6", db))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    SqlParameter ctn = new SqlParameter("@cnt", SqlDbType.Int, 10);
+                    ctn.Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add(ctn);
+                    cmd.ExecuteNonQuery();
+                    Console.WriteLine(ctn.Value);
+                }
+                db.Close();
+            }
+        }
     }
 }
