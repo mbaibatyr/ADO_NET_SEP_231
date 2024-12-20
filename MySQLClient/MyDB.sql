@@ -43,3 +43,27 @@ INSERT INTO City (name,
 VALUES(@name,
 		@population,
 		@birthdate)
+
+create proc pCity;4 -- UPDATE
+@id int,
+@name nvarchar(100),
+@population int,
+@birthdate datetime
+/*
+	pCity;4 2, N'Астана', 2000000, '1992-01-01'
+*/
+as
+UPDATE City
+	SET name = @name,
+		population = @population,
+		birthdate = @birthdate
+WHERE id = @id
+
+create proc pCity;5 -- DELETE
+@id int
+/*
+	pCity;5 2
+*/
+as
+DELETE FROM City
+WHERE id = @id
