@@ -67,3 +67,15 @@ create proc pCity;5 -- DELETE
 as
 DELETE FROM City
 WHERE id = @id
+
+alter proc pCity;6 -- OUT
+@cnt int OUT
+/*
+	DECLARE
+		@cnt int
+	EXEC pCity;6 @cnt OUT
+	SELECT @cnt
+*/
+as
+SELECT @cnt = COUNT(*)
+FROM City
