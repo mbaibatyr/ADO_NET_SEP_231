@@ -11,7 +11,8 @@ namespace MySQLClient
 
         static void Main()
         {
-            Ado.Select();
+            //Ado.Select();
+            Ado.SelectByName("о");
 
             #region примеры вызовов
             //TestConnection();
