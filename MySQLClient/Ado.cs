@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace MySQLClient
 {
-    internal class Ado
+    public class Ado
     {
         static string conStr = "Server=204-P;Database=MyDB;Trusted_Connection=True;TrustServerCertificate=true";
-        static void Select()
+        public static void Select()
         {
             using (SqlConnection db = new SqlConnection(conStr))
             {

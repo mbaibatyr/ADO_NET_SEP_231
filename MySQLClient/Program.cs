@@ -11,14 +11,18 @@ namespace MySQLClient
 
         static void Main()
         {
+            Ado.Select();
+
+            #region примеры вызовов
             //TestConnection();
             //Console.WriteLine(GetDate());
             //SelectFromTable2();
             //SelectFromProc();
             //SelectFromView();
             //SelectFromTableFunction();
-            InsertProc();
-            SelectFromProc();
+            //InsertProc();
+            //SelectFromProc();
+            #endregion 
         }
 
         static string GetDate()
