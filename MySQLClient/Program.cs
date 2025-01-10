@@ -17,8 +17,9 @@ namespace MySQLClient
             //SelectFromProc();
             //SelectFromView();
             //SelectFromTableFunction();
-            InsertProc();
-            SelectFromProc();
+            //InsertProc();
+            //SelectFromProc();
+            MultySet();
         }
 
         static string GetDate()
@@ -175,6 +176,32 @@ namespace MySQLClient
                     cmd.Parameters.AddWithValue("@name", "Шымкент");
                     cmd.Parameters.AddWithValue("@date_birth", DateTime.Now.AddYears(-100));
                     cmd.ExecuteNonQuery();
+                }
+                db.Close();
+            }
+        }
+        
+        static void MultySet()
+        {
+            DataSet ds = new DataSet();
+            using (SqlConnection db = new SqlConnection("Server=206-P;Database=testDB;Trusted_Connection=True;TrustServerCertificate=true"))
+            {
+                db.Open();
+                using (SqlCommand cmd = new SqlCommand("pMultySet", db))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        da.Fill(ds);
+                        for (int i = 0; i < ds.Tables.Count; i++)
+                        {
+                            foreach (DataRow row in ds.Tables[i].Rows)
+                            {
+                                Console.WriteLine(row[0].ToString());
+                            }
+                        }
+
+                    }
                 }
                 db.Close();
             }
