@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Data;
 
@@ -6,11 +7,19 @@ namespace MySQLClient
 {
     public class Program
     {
+        public static IConfigurationRoot config;
         static string conStr = "Server=206-P;Database=DB;Trusted_Connection=True;TrustServerCertificate=true";
         static string conStr2 = "Server=206-P;Database=DB;User Id=user1;Password=1234;TrustServerCertificate=True;";
 
         static void Main()
         {
+            config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+            //Ado.Select();
+            //Ado.SelectByName("о");
+            //Ado.Insert("Актобе", 800000, new DateTime(1900, 01, 01));
+            Ado.OutParameter();
+
+            #region примеры вызовов
             //TestConnection();
             //Console.WriteLine(GetDate());
             //SelectFromTable2();
@@ -19,7 +28,11 @@ namespace MySQLClient
             //SelectFromTableFunction();
             //InsertProc();
             //SelectFromProc();
+<<<<<<< HEAD
             MultySet();
+=======
+            #endregion 
+>>>>>>> 48f5524de5b6d0448da10854cbf235e745c51895
         }
 
         static string GetDate()
