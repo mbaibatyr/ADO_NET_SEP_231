@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using MyEFCore.Model;
 using System;
 using System.Collections.Generic;
@@ -11,12 +12,16 @@ namespace MyEFCore.MyContext
     public class Context : DbContext
     {
         public DbSet<Country> Country { get; set; }
+        public DbSet<City> City { get; set; }
+        public DbSet<Student> Student { get; set; }
+
+        
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {            
-            optionsBuilder.UseSqlServer(Program.config["db"]);
-            //optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=D:\\Temp\\db_test.mdf;Integrated Security=True;TrustServerCertificate=true;");
-            //optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information);
+            //optionsBuilder.UseSqlServer(Program.config["db"]);
+            optionsBuilder.UseSqlServer("Server=206-P;Database=testDB;Trusted_Connection=True;TrustServerCertificate=true");
+            optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information);
         }
     }
 }
