@@ -21,7 +21,7 @@ namespace MyEFCore.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("MyEFCore.Model.City", b =>
+            modelBuilder.Entity("MyEFCore.Model.Capital", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -29,42 +29,23 @@ namespace MyEFCore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CountryId")
+                    b.Property<int>("Country2Id")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CountryId");
+                    b.HasIndex("Country2Id")
+                        .IsUnique();
 
-                    b.ToTable("City");
+                    b.ToTable("Capital");
                 });
 
-            modelBuilder.Entity("MyEFCore.Model.Country", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Capital")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Country");
-                });
-
-            modelBuilder.Entity("MyEFCore.Model.Student", b =>
+            modelBuilder.Entity("MyEFCore.Model.Country2", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -74,27 +55,29 @@ namespace MyEFCore.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Students");
+                    b.ToTable("Country2");
                 });
 
-            modelBuilder.Entity("MyEFCore.Model.City", b =>
+            modelBuilder.Entity("MyEFCore.Model.Capital", b =>
                 {
-                    b.HasOne("MyEFCore.Model.Country", "Country")
-                        .WithMany("City")
-                        .HasForeignKey("CountryId")
+                    b.HasOne("MyEFCore.Model.Country2", "Country2")
+                        .WithOne("Capital")
+                        .HasForeignKey("MyEFCore.Model.Capital", "Country2Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Country");
+                    b.Navigation("Country2");
                 });
 
-            modelBuilder.Entity("MyEFCore.Model.Country", b =>
+            modelBuilder.Entity("MyEFCore.Model.Country2", b =>
                 {
-                    b.Navigation("City");
+                    b.Navigation("Capital")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
