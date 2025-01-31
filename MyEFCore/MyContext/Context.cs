@@ -46,6 +46,6 @@ namespace MyEFCore.MyContext
 /*
 dotnet ef dbcontext scaffold "Server=206-P;Database=testDB;Trusted_Connection=True;TrustServerCertificate=true" Microsoft.EntityFrameworkCore.SqlServer -o Models -t Book -t Category -t BookCategory
 Scaffold-DbContext "Server=206-P;Database=testDB;Trusted_Connection=True;TrustServerCertificate=true" Microsoft.EntityFrameworkCore.SqlServer -Tables Book, Category, BookCategory -OutputDir Models 
-Scaffold-DbContext "Server=206-P;Database=testDB;Trusted_Connection=True;TrustServerCertificate=true" Microsoft.EntityFrameworkCore.SqlServer -Tables Book, Category, BookCategory -OutputDir Models 
+Scaffold-DbContext "Server=.;Database=testDB;Trusted_Connection=True;TrustServerCertificate=true" Microsoft.EntityFrameworkCore.SqlServer -Tables Book, Category, BookCategory -OutputDir Models 
  
  */
