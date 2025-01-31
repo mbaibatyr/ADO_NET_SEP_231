@@ -76,7 +76,7 @@ namespace MyEFCore.Model
     {
         public int id { get; set; }
         public string name { get; set; }
-        public List<Child> Child { get; set; }
+        public virtual List<Child> Child { get; set; }
     }
 
     [Table("Child")]
@@ -84,8 +84,9 @@ namespace MyEFCore.Model
     {
         public int id { get; set; }
         public string name { get; set; }
-        public int parent_id { get; set; }
-        public Parent Parent { get; set; }
+        public int parent_id { get; set; }        
+        [ForeignKey("parent_id")]
+        public virtual Parent Parent { get; set; }
     }
 }
 
