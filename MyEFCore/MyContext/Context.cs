@@ -28,9 +28,9 @@ namespace MyEFCore.MyContext
         //public DbSet<Salary> Salary { get; set; }
 
 
-        public DbSet<Order> Order { get; set; }
-        public DbSet<Product> Product { get; set; }
-        public DbSet<OrderDetails> OrderDetails { get; set; }
+        //public DbSet<Order> Order { get; set; }
+        //public DbSet<Product> Product { get; set; }
+        //public DbSet<OrderDetails> OrderDetails { get; set; }
 
 
 
@@ -42,3 +42,8 @@ namespace MyEFCore.MyContext
         }       
     }
 }
+
+/*
+dotnet ef dbcontext scaffold "Server=206-P;Database=testDB;Trusted_Connection=True;TrustServerCertificate=true" Microsoft.EntityFrameworkCore.SqlServer -o Models -t Book -t Category -t BookCategory
+ 
+ */
