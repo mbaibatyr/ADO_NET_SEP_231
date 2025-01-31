@@ -16,9 +16,7 @@ namespace MyEFCore.Models
         {
         }
 
-        public virtual DbSet<Book> Books { get; set; } = null!;
-        public virtual DbSet<BookCategory> BookCategories { get; set; } = null!;
-        public virtual DbSet<Category> Categories { get; set; } = null!;
+       
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

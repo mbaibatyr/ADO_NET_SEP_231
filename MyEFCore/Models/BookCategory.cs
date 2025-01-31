@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace MyEFCore.Models
 {
     public partial class BookCategory
     {
-        public int Id { get; set; }
-        public int? BookId { get; set; }
-        public int? CategoryId { get; set; }
+        [Key]
+        public int id { get; set; }
+        public int? book_id { get; set; }
+        public int? category_id { get; set; }
 
         public virtual Book? Book { get; set; }
         public virtual Category? Category { get; set; }

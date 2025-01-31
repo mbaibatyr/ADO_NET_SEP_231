@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace MyEFCore.Models
 {
@@ -7,12 +8,12 @@ namespace MyEFCore.Models
     {
         public Category()
         {
-            BookCategories = new HashSet<BookCategory>();
+            BookCategory = new HashSet<BookCategory>();
         }
+        [Key]
+        public int category_id { get; set; }
+        public string? category_name { get; set; }
 
-        public int CategoryId { get; set; }
-        public string? CategoryName { get; set; }
-
-        public virtual ICollection<BookCategory> BookCategories { get; set; }
+        public virtual ICollection<BookCategory> BookCategory { get; set; }
     }
 }

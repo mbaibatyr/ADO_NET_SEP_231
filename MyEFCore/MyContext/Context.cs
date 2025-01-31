@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MyEFCore.Model;
+using MyEFCore.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,17 +28,19 @@ namespace MyEFCore.MyContext
         //public DbSet<Employee> Employee { get; set; }
         //public DbSet<Salary> Salary { get; set; }
 
-
         //public DbSet<Order> Order { get; set; }
         //public DbSet<Product> Product { get; set; }
         //public DbSet<OrderDetails> OrderDetails { get; set; }
 
+        public virtual DbSet<Book> Book { get; set; } = null!;
+        public virtual DbSet<BookCategory> BookCategory { get; set; } = null!;
+        public virtual DbSet<Category> Category { get; set; } = null!;
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {            
             //optionsBuilder.UseSqlServer(Program.config["db"]);
-            optionsBuilder.UseSqlServer("Server=206-P;Database=testDB;Trusted_Connection=True;TrustServerCertificate=true");
+            optionsBuilder.UseSqlServer("Server=.;Database=testDB;Trusted_Connection=True;TrustServerCertificate=true");
             optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information);
         }       
     }
