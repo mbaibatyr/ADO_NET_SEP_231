@@ -48,4 +48,50 @@ dotnet ef dbcontext scaffold "Server=206-P;Database=testDB;Trusted_Connection=Tr
 Scaffold-DbContext "Server=206-P;Database=testDB;Trusted_Connection=True;TrustServerCertificate=true" Microsoft.EntityFrameworkCore.SqlServer -Tables Book, Category, BookCategory -OutputDir Models 
 Scaffold-DbContext "Server=.;Database=testDB;Trusted_Connection=True;TrustServerCertificate=true" Microsoft.EntityFrameworkCore.SqlServer -Tables Book, Category, BookCategory -OutputDir Models 
  
+
+create table Book
+(
+	book_id int primary key identity,
+	book_name nvarchar(100)
+)
+
+create table Category
+(
+	category_id int primary key identity,
+	category_name nvarchar(100)
+)
+
+create table BookCategory
+(
+	id int primary key identity,
+	book_id int,
+	category_id int,
+	foreign key (book_id) references Book(book_id),
+	foreign key (category_id) references Category(category_id)
+)
+
+
+insert into Category
+values (N'Исторический'), (N'Приключение'), (N'Военный')
+
+
+insert into Book
+values (N'Война и мир'), (N'Евгений Онегин'), (N'Белый клык')
+
+
+insert into BookCategory (book_id, category_id)
+values (1, 1), (1, 3), 
+		(2, 2), 
+		(3, 2), 
+		(3, 1) 
+
+SELECT b.book_name,
+		c.category_name
+FROM Book b JOIN BookCategory bc ON b.book_id = bc.book_id
+JOIN Category c ON c.category_id = bc.category_id
+
+
+
+
+
  */
