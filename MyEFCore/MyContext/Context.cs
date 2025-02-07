@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using MyEFCore.Model;
 using MyEFCore.Models;
+using MyEFCore.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,12 @@ namespace MyEFCore.MyContext
         //public virtual DbSet<Category> Category { get; set; } = null!;
 
         public DbSet<Book> Book { get; set; }
+
+
+
+
+        public DbSet<BookCategory2> BookCategory2 { get; set; }
+        public DbSet<ReportByCategory> ReportByCategory { get; set; }       
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

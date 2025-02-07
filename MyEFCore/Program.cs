@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using MyEFCore.Model;
 using MyEFCore.Models;
 using MyEFCore.MyContext;
+using System.Data;
 
 namespace MyEFCore
 {
@@ -13,15 +14,56 @@ namespace MyEFCore
         static void Main(string[] args)
         {
             config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+            using (SqlConnection db = new SqlConnection(config["db"]))
+            {
+                db.Open();
+                using (SqlCommand cmd = new SqlCommand("pBook;4", db))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    DataTable dt = new DataTable();
+                    dt.Load(cmd.ExecuteReader());
+                    //SqlDataReader reader = cmd.ExecuteReader();
+                    //while (reader.Read())
+                    //{
+                    //    Console.WriteLine($"{reader[0].ToString()} {reader[1].ToString()}");
+                    //}
+
+                }
+                db.Close();
+            }
+
+            return;
+
 
             using (Context db = new Context())
             {
-                SqlParameter p = new SqlParameter("@book_id", 1);
-                var books = db.Book.FromSqlRaw("pBook;2 @book_id", p);
-                foreach (Book item in books)
+                var result = db.ReportByCategory.FromSqlRaw("pBook;5");
+                foreach (var item in result)
                 {
-                    Console.WriteLine($"{item.book_id} {item.book_name}");
+                    Console.WriteLine($"{item.category_name} {item.cnt}");
                 }
+
+
+
+
+                //var bookCategory2 = db.BookCategory2.FromSqlRaw("pBook;4");
+                //foreach (var item in bookCategory2)
+                //{
+                //    Console.WriteLine($"{item.book_name} {item.category_name}");
+                //}
+                //var books = db.Book.FromSqlInterpolated($"pBook;2 {1}, {3}");
+                //foreach (Book item in books)
+                //{
+                //    Console.WriteLine($"{item.book_id} {item.book_name}");
+                //}
+
+                //SqlParameter p_1 = new SqlParameter("@book_id_1", 1);
+                //SqlParameter p_2 = new SqlParameter("@book_id_2", 2);
+                //var books = db.Book.FromSqlRaw("pBook;2 @book_id_1, @book_id_2", p_1, p_2);
+                //foreach (Book item in books)
+                //{
+                //    Console.WriteLine($"{item.book_id} {item.book_name}");
+                //}
 
 
 
