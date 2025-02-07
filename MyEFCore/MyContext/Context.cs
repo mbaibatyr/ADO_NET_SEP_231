@@ -22,8 +22,8 @@ namespace MyEFCore.MyContext
         //public DbSet<Country2> Country2 { get; set; }
         //public DbSet<Capital> Capital { get; set; }
 
-        public DbSet<Parent> Parent { get; set; }
-        public DbSet<Child> Child { get; set; }
+        //public DbSet<Parent> Parent { get; set; }
+        //public DbSet<Child> Child { get; set; }
 
         //public DbSet<Employee> Employee { get; set; }
         //public DbSet<Salary> Salary { get; set; }
@@ -36,11 +36,13 @@ namespace MyEFCore.MyContext
         //public virtual DbSet<BookCategory> BookCategory { get; set; } = null!;
         //public virtual DbSet<Category> Category { get; set; } = null!;
 
+        public DbSet<Book> Book { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseSqlServer(Program.config["db"]);
-            optionsBuilder.UseLazyLoadingProxies();
+            //optionsBuilder.UseLazyLoadingProxies();
             optionsBuilder.UseSqlServer("Server=.;Database=testDB;Trusted_Connection=True;TrustServerCertificate=true");
             optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information);
         }       

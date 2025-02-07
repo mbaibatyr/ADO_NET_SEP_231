@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using MyEFCore.Model;
+using MyEFCore.Models;
 using MyEFCore.MyContext;
 
 namespace MyEFCore
@@ -14,6 +16,21 @@ namespace MyEFCore
 
             using (Context db = new Context())
             {
+                SqlParameter p = new SqlParameter("@book_id", 1);
+                var books = db.Book.FromSqlRaw("pBook;2 @book_id", p);
+                foreach (Book item in books)
+                {
+                    Console.WriteLine($"{item.book_id} {item.book_name}");
+                }
+
+
+
+                //var books = db.Book.FromSqlRaw("pBook");                
+                //foreach (Book item in books)
+                //{
+                //    Console.WriteLine($"{item.book_id} {item.book_name}");
+                //}
+
                 //foreach (var item in db.Parent)
                 //{
                 //    Console.WriteLine($"{item.id} {item.name}");
@@ -36,9 +53,9 @@ namespace MyEFCore
 
 
 
-                var children = db.Child.ToList();
-                foreach (var ch in children)
-                    Console.WriteLine($"{ch.name} - {ch.Parent?.name}");
+                //var children = db.Child.ToList();
+                //foreach (var ch in children)
+                //    Console.WriteLine($"{ch.name} - {ch.Parent?.name}");
 
 
                 //var p = db.Parent.FirstOrDefault(z => z.id == 1);
