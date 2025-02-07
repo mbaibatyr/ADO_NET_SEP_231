@@ -14,34 +14,86 @@ namespace MyEFCore
         static void Main(string[] args)
         {
             config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-            using (SqlConnection db = new SqlConnection(config["db"]))
+
+
+            //using (SqlConnection db = new SqlConnection(config["db"]))
+            //{
+            //    db.Open();
+            //    SqlTransaction tran = db.BeginTransaction();
+            //    try
+            //    {
+            //        using (SqlCommand cmd = new SqlCommand("pBook;4", db))
+            //        {
+            //            cmd.Transaction = tran;
+            //            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            //            SqlDataReader reader = cmd.ExecuteReader();
+            //            while (reader.Read())
+            //            {
+            //                Console.WriteLine($"{reader[0].ToString()} {reader[1].ToString()}");
+            //            }
+            //            tran.Commit();
+            //        }
+            //    }
+            //    catch (Exception)
+            //    {
+            //        tran.Rollback();
+            //    }
+
+            //    db.Close();
+            //}
+
+
+
+            using (SqlConnection db2 = new SqlConnection(config["db"]))
             {
-                db.Open();
-                using (SqlCommand cmd = new SqlCommand("pBook;4", db))
+                try
                 {
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    DataTable dt = new DataTable();
-                    dt.Load(cmd.ExecuteReader());
-                    //SqlDataReader reader = cmd.ExecuteReader();
-                    //while (reader.Read())
-                    //{
-                    //    Console.WriteLine($"{reader[0].ToString()} {reader[1].ToString()}");
-                    //}
-
+                    db2.Open();
+                    using (SqlCommand cmd = new SqlCommand("pBook;44", db2))
+                    {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            Console.WriteLine($"{reader[0].ToString()} {reader[1].ToString()}");
+                        }
+                    }
                 }
-                db.Close();
-            }
+                catch (Exception)
+                {
 
+                    throw;
+                }
+                finally
+                {
+                    db2.Close();
+                }
+            }
             return;
 
 
             using (Context db = new Context())
             {
-                var result = db.ReportByCategory.FromSqlRaw("pBook;5");
-                foreach (var item in result)
+                var transaction = db.Database.BeginTransaction();
+
+                try
                 {
-                    Console.WriteLine($"{item.category_name} {item.cnt}");
+                    db.Book.Add(new Models.Book { book_id = 1, book_name = "1234" });
+                    db.SaveChanges();
+                    transaction.Commit();
                 }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                }
+
+
+
+                //var result = db.ReportByCategory.FromSqlRaw("pBook;5");
+                //foreach (var item in result)
+                //{
+                //    Console.WriteLine($"{item.category_name} {item.cnt}");
+                //}
 
 
 

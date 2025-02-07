@@ -39,9 +39,6 @@ namespace MyEFCore.MyContext
 
         public DbSet<Book> Book { get; set; }
 
-
-
-
         public DbSet<BookCategory2> BookCategory2 { get; set; }
         public DbSet<ReportByCategory> ReportByCategory { get; set; }       
 
