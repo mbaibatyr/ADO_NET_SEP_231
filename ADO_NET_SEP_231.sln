@@ -5,7 +5,9 @@ VisualStudioVersion = 17.2.32602.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySQLClient", "MySQLClient\MySQLClient.csproj", "{F21C60CC-B630-4D02-8688-DCCF050DDA18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyEFCore", "MyEFCore\MyEFCore.csproj", "{44D2C3CA-0D49-4D6C-87EF-8C86D88A2CFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyEFCore", "MyEFCore\MyEFCore.csproj", "{44D2C3CA-0D49-4D6C-87EF-8C86D88A2CFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyDapper", "MyDapper\MyDapper.csproj", "{3A45A26A-4E53-4FC1-A935-86184CFCFCD8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{44D2C3CA-0D49-4D6C-87EF-8C86D88A2CFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44D2C3CA-0D49-4D6C-87EF-8C86D88A2CFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44D2C3CA-0D49-4D6C-87EF-8C86D88A2CFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A45A26A-4E53-4FC1-A935-86184CFCFCD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A45A26A-4E53-4FC1-A935-86184CFCFCD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A45A26A-4E53-4FC1-A935-86184CFCFCD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A45A26A-4E53-4FC1-A935-86184CFCFCD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

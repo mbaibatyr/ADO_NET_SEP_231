@@ -44,48 +44,51 @@ namespace MyEFCore
 
 
 
-            using (SqlConnection db2 = new SqlConnection(config["db"]))
-            {
-                try
-                {
-                    db2.Open();
-                    using (SqlCommand cmd = new SqlCommand("pBook;44", db2))
-                    {
-                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                        SqlDataReader reader = cmd.ExecuteReader();
-                        while (reader.Read())
-                        {
-                            Console.WriteLine($"{reader[0].ToString()} {reader[1].ToString()}");
-                        }
-                    }
-                }
-                catch (Exception)
-                {
+            //using (SqlConnection db2 = new SqlConnection(config["db"]))
+            //{
+            //    try
+            //    {
+            //        db2.Open();
+            //        using (SqlCommand cmd = new SqlCommand("pBook;44", db2))
+            //        {
+            //            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            //            SqlDataReader reader = cmd.ExecuteReader();
+            //            while (reader.Read())
+            //            {
+            //                Console.WriteLine($"{reader[0].ToString()} {reader[1].ToString()}");
+            //            }
+            //        }
+            //    }
+            //    catch (Exception)
+            //    {
 
-                    throw;
-                }
-                finally
-                {
-                    db2.Close();
-                }
-            }
-            return;
+            //        throw;
+            //    }
+            //    finally
+            //    {
+            //        db2.Close();
+            //    }
+            //}
+            //return;
 
 
             using (Context db = new Context())
             {
-                var transaction = db.Database.BeginTransaction();
+                //var bookCategory2 = db.BookCategory2.FromSqlRaw("pBook;4");
+                //db.Database.ExecuteSqlInterpolated("INSERT INTO ")
 
-                try
-                {
-                    db.Book.Add(new Models.Book { book_id = 1, book_name = "1234" });
-                    db.SaveChanges();
-                    transaction.Commit();
-                }
-                catch (Exception)
-                {
-                    transaction.Rollback();
-                }
+                //var transaction = db.Database.BeginTransaction();
+
+                //try
+                //{
+                //    db.Book.Add(new Models.Book { book_id = 1, book_name = "1234" });
+                //    db.SaveChanges();
+                //    transaction.Commit();
+                //}
+                //catch (Exception)
+                //{
+                //    transaction.Rollback();
+                //}
 
 
 
