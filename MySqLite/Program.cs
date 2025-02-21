@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.Sqlite;
+using Dapper;
 
 namespace MySqLite
 {
@@ -6,7 +7,8 @@ namespace MySqLite
     {
         static void Main(string[] args)
         {
-            MySqlite.GetData();
+            //MySqlite.GetData();
+            MySqlite.GetData2();
         }
     }
 
@@ -28,13 +30,37 @@ namespace MySqLite
                         }
                     }
                 }
-                catch {}
+                catch { }
                 finally
                 {
                     db.Close();
                 }
-                
+
             }
         }
+
+        public static void GetData2()
+        {
+            using (var db = new SqliteConnection(@"Data Source=C:\Users\байбатыровм\Documents\sqlite\MyDB.db;"))
+            {
+                try
+                {
+                    var rows = db.Query<Country>("select * from country");
+                    {
+                        foreach (var row in rows)
+                        {
+                            Console.WriteLine($"{row.Id} --- {row.Name}");
+                        }
+                    }
+                }
+                catch { }
+            }
+        }
+    }
+
+    class Country
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
     }
 }
